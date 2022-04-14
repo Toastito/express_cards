@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <title>Magic Cards</title>
+</head>
+<body>
+    <main>
+        <% cards.forEach((card) => { %>
+            <% if ((card.layout === 'art_series' || card.layout === 'modal_dfc' || card.layout === 'transform') && card.image_status !== 'missing') {%>
+                <% card.card_faces.forEach((cardFace) => { %>
+                    <section>
+                        <a href="/cards/<%= card.id %>"><img src="<%= cardFace.image_uris.small %>" alt=""></p></a>
+                        <p><%= `${cardFace.name}` %></p>
+                    </section>
+                <% }); %> 
+            <% } else if (card.image_status !== 'missing') {%>
+                <section>
+                    <a href="/cards/<%= card.id %>"><img src="<%= card.image_uris ? JSON.parse(JSON.stringify(card.image_uris)).small : '' %>"></a>
+                    <p><%= card.name %></p>
+                </section>
+            <% } %> 
+        <% }); %>
+    </main>
+</body>
+</html>
