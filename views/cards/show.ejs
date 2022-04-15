@@ -1,7 +1,7 @@
 <%- include('../partials/header') %> 
   <% if ((card.layout === 'art_series' || card.layout === 'modal_dfc' || card.layout === 'transform') && card.image_status !== 'missing') {%>
     <% card.card_faces.forEach((cardFace) => { %>
-        <section>
+        <section class="card-large-view">
             <div class="card-container medium">
                 <img src="<%= cardFace.image_uris.large %>" alt=""></p>
             </div>
@@ -9,14 +9,19 @@
         </section>
     <% }); %> 
 <% } else if (card.image_status !== 'missing') {%>
-    <section>
+    <section class="card-large-view">
         <div class="card-container medium">
             <img src="<%= card.image_uris ? JSON.parse(JSON.stringify(card.image_uris)).large : '' %>">
         </div>
         <p class="card-show-name"><%= card.name %></p>
     </section>
-<% } %> 
-    <form action="/cards/<%= card.id %>?_method=DELETE" class="delete-form" method="POST">
-        <button type="submit" class="delete-button">Delete Card</button>
-    </form>
+<% } %>
+    <section class="card-edits">
+        <a href="<%= card.id %>/edit">
+            <button class="edit-button">Edit Card Name</button>
+        </a>
+        <form action="/cards/<%= card.id %>?_method=DELETE" class="delete-form" method="POST">
+            <button type="submit" class="delete-button">Delete Card</button>
+        </form>
+    </section>
 <%- include('../partials/footer') %> 

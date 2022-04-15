@@ -2,7 +2,8 @@ module.exports = {
     getAll,
     getOne,
     create,
-    removeOne
+    removeOne,
+    update
 };
 
 const cards = [
@@ -59,4 +60,11 @@ function create(card) {
 
 function removeOne(id) {
     cards.splice(cards.findIndex((card) => card.id === id), 1);
+}
+
+function update(id, body) {
+    const idx = cards.findIndex((card) => card.id === id);
+    Object.keys(body).forEach((key) => {
+        cards[idx][key] = body[key];
+    });
 }

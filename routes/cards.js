@@ -9,11 +9,14 @@ router.get('/', cardsCtrl.index);
 router.get('/new', cardsCtrl.new);
 // GET individual card
 router.get('/:id', cardsCtrl.show);
+// GET edit page for individual card
+router.get('/:id/edit', cardsCtrl.edit);
 // POST /card add new card
 router.post('/', cardsCtrl.create);
 // Delete /card/:id
 router.delete('/:id', cardsCtrl.delete);
+// PUT Revised card
+router.put('/:id', cardsCtrl.update);
 
-// router.get('/:id', cardsCtrl.show);
 
 module.exports = router;
