@@ -1,0 +1,22 @@
+<%- include('../partials/header') %> 
+  <% if ((card.layout === 'art_series' || card.layout === 'modal_dfc' || card.layout === 'transform') && card.image_status !== 'missing') {%>
+    <% card.card_faces.forEach((cardFace) => { %>
+        <section>
+            <div class="card-container medium">
+                <img src="<%= cardFace.image_uris.large %>" alt=""></p>
+            </div>
+            <p><%= `${cardFace.name}` %></p>
+        </section>
+    <% }); %> 
+<% } else if (card.image_status !== 'missing') {%>
+    <section>
+        <div class="card-container medium">
+            <img src="<%= card.image_uris ? JSON.parse(JSON.stringify(card.image_uris)).large : '' %>">
+        </div>
+        <p class="card-show-name"><%= card.name %></p>
+    </section>
+<% } %> 
+    <form action="/cards/<%= card.id %>?_method=DELETE" class="delete-form" method="POST">
+        <button type="submit" class="delete-button">Delete Card</button>
+    </form>
+<%- include('../partials/footer') %> 
